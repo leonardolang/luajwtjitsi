@@ -145,7 +145,8 @@ function M.verify(data, algo, key)
 		return nil, "Invalid json"
 	end
 
-	if not header.typ or header.typ ~= "JWT" then
+	-- Only validate typ if present
+	if header.typ and header.typ ~= "JWT" then
 		return nil, "Invalid typ"
 	end
 
@@ -209,7 +210,8 @@ function M.decode(data, key, verify)
 
 	if verify then
 
-		if not header.typ or header.typ ~= "JWT" then
+		-- Only validate typ if present
+		if header.typ and header.typ ~= "JWT" then
 			return nil, "Invalid typ"
 		end
 
